@@ -1,0 +1,13 @@
+.fundo_cadastro{
+    background-color: blue;
+    width: 100vw;
+    height: 100vh;
+}
+
+.select_cadastro{
+    background-color: transparent;
+    color: black;
+    width: 23vw;
+    height: 4vh;
+    font-size: 20px;
+}
