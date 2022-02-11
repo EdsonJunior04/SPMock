@@ -78,6 +78,8 @@ class consultasAdm extends React.Component {
             })
             if (resposta.status === 200) {
                 this.setState({ listaConsultas: resposta.data });
+                console.log("Consultas")
+                console.log(resposta.data)
             }
         }
 
@@ -194,7 +196,7 @@ class consultasAdm extends React.Component {
                                 <tr>
                                     <th>#</th>
                                     <th>Situação</th>
-                                    {/* <th>Paciente</th> */}
+                                    <th>Paciente</th>
                                     <th>Médico</th>
                                     <th>Descrição</th>
                                     <th>Data</th>
@@ -206,9 +208,9 @@ class consultasAdm extends React.Component {
                                         return (
                                             <tr key={consulta.idConsulta} >
                                                 <td>{consulta.idConsulta}</td>
-                                                <td>{consulta.idSituacaoNavigation.descricao}</td>
-                                                {/* <td>{consulta.idPacienteNaviation.nome}</td> */}
-                                                <td>{consulta.idMedico}</td>
+                                                <td>{consulta.idSituacaoNavigation[0].descricao}</td>
+                                                <td>{consulta.idPacienteNavigation[0].idUsuarioNavigation[0].nome}</td>
+                                                <td>{consulta.idMedicoNavigation[0].idUsuarioNavigation[0].nome}</td>
                                                 <td>{consulta.descricao}</td>
                                                 <td>{Intl.DateTimeFormat("pt-BR", {
                                                     year: 'numeric', month: 'short', day: 'numeric',
@@ -227,90 +229,7 @@ class consultasAdm extends React.Component {
                     </section>
 
 
-                    {/* Cadastro de tipos de consulta */}
-                    <div className="afastar_list_consulta" id="cadastro">
-                        <section className="cadastro_consulta grid ">
-                            <h2 className="letra_tam" >Cadastro de Consultas</h2>
-                            <div className="cadastro_ajuste_consulta">
-                                <form onSubmit={this.cadastrarConsulta} >
-                                    <div>
-
-                                        {/* <select
-                                            className="input_consulta"
-                                            name="idPaciente"
-                                            value={this.state.idPaciente}
-                                            onChange={this.atualizaStateCampo}>
-                                            <option value="0">Selecione o paciente</option>
-
-                                            {
-                                                this.state.listaPacientes.map((paciente) => {
-                                                    return (
-                                                        <option key={paciente.idPaciente} value={paciente.idPaciente}>
-                                                            {paciente.idUsuarioNavigation.nome}
-                                                        </option>
-                                                    )
-                                                })
-                                            }
-                                        </select> */}
-
-                                        {/* <select
-                                            className="input_consulta"
-                                            name="idMedico"
-                                            value={this.state.idMedico}
-                                            onChange={this.atualizaStateCampo}>
-                                            <option value="0">Selecione o Médico</option>
-
-                                            {
-                                                this.state.listaMedicos.map((medico) => {
-                                                    return (
-                                                        <option key={medico.idMedico} value={medico.idMedico}>
-                                                            {medico.idUsuarioNavigation.nome}
-                                                        </option>
-                                                    )
-                                                })
-                                            }
-                                        </select> */}
-                                        {/* <select
-                                            className="input_consulta"
-                                            name="idSituacao"
-                                            value={this.state.idSituacao}
-                                            onChange={this.atualizaStateCampo}>
-                                            <option value="0">Selecione a Situação</option>
-
-                                            <option value={this.state.listaSituacao[0]}>Agendada</option>
-                                            <option value={this.state.listaSituacao[1]}>Cancelada</option>
-                                            <option value={this.state.listaSituacao[2]}>Realizada</option>
-
-
-                                        </select> */}
-
-
-
-                                        <input
-                                            className="input_consulta"
-                                            type="datetime-local"
-                                            name="dataConsulta"
-                                            value={this.state.dataConsulta}
-                                            onChange={this.atualizaStateCampo}
-                                        />
-
-                                        <div className="btn_cadastrar_consulta">
-
-                                            {this.state.isLoading && (
-                                                <button className="btn_consultaAdm " disabled>
-                                                    Loading...{' '}
-                                                </button>
-                                            )}
-
-                                            {this.state.isLoading === false && (
-                                                <button className="btn_consultaAdm btn" >Cadastrar</button>
-                                            )}
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </section>
-                    </div>
+                   
 
 
                 </main>
