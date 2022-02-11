@@ -9,7 +9,7 @@ export default class PerfilFoto extends Component {
   }
 
   componentDidMount() {
-    this.buscarImagem();
+    // this.buscarImagem();
   }
 
   buscarImagem = () => {

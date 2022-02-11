@@ -5,6 +5,7 @@ import '../../Assets/CSS/header.css'
 import api from '../../services/api';
 import '../../Assets/CSS/consultasAdm.css';
 import logo from '../../Assets/img/Sp Medical Grouplogo.svg';
+import axios from 'axios';
 import HeaderAdm from '../../components/header/headerAdm';
 
 
@@ -33,13 +34,13 @@ class consultasAdm extends React.Component {
     buscarMedicos = async () => {
         try {
 
-            const resposta = await api.get('/MEDICO', {
+            const resposta = await axios.get('https://620554f2161670001741b901.mockapi.io/MEDICO', {
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
                 },
             })
             if (resposta.status === 200) {
-                this.setState({ listaMedicos: resposta.data });
+                this.setState({ listaMedicos: resposta.data.lista });
             }
         }
 
@@ -51,7 +52,7 @@ class consultasAdm extends React.Component {
     buscarPacientes = async () => {
         try {
 
-            const resposta = await api.get('/Paciente', {
+            const resposta = await axios.get('https://620554f2161670001741b901.mockapi.io/Paciente', {
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('usuario-login')
                 }
@@ -70,7 +71,7 @@ class consultasAdm extends React.Component {
         try {
 
 
-            const resposta = await api.get('/CONSULTA', {
+            const resposta = await api.get('https://620554f2161670001741b901.mockapi.io/CONSULTA', {
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('usuario-login')
                 }
@@ -106,7 +107,7 @@ class consultasAdm extends React.Component {
     };
 
     deletarConsulta = (consulta) => {
-        api.delete('/Consultas' + consulta.idConsulta, {
+        api.delete('https://620554f2161670001741b901.mockapi.io/CONSULTA' + consulta.idConsulta, {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             }
@@ -123,7 +124,7 @@ class consultasAdm extends React.Component {
             .then(this.buscarConsulta);
 
     };
-    ScancelarConsulta = (consulta) => {
+    cancelarConsulta = (consulta) => {
         console.log(consulta.idConsulta)
         api.patch('/Consultas/Cancelar/' + consulta.idConsulta, {
             headers: {
@@ -149,7 +150,7 @@ class consultasAdm extends React.Component {
 
 
 
-            const resposta = api.post('/Consultas', {
+            const resposta = api.post('https://620554f2161670001741b901.mockapi.io/CONSULTA', {
                 idPaciente: this.state.idPaciente,
                 idMedico: this.state.idMedico,
                 idSituacao: this.state.idSituacao,
@@ -181,7 +182,7 @@ class consultasAdm extends React.Component {
             <div>
 
                 <header>
-                    {/* <HeaderAdm /> */}
+                    <HeaderAdm />
                 </header>
 
                 <main className="afastar_list_consulta ">
@@ -193,7 +194,7 @@ class consultasAdm extends React.Component {
                                 <tr>
                                     <th>#</th>
                                     <th>Situação</th>
-                                    <th>Paciente</th>
+                                    {/* <th>Paciente</th> */}
                                     <th>Médico</th>
                                     <th>Descrição</th>
                                     <th>Data</th>
@@ -206,8 +207,8 @@ class consultasAdm extends React.Component {
                                             <tr key={consulta.idConsulta} >
                                                 <td>{consulta.idConsulta}</td>
                                                 <td>{consulta.idSituacaoNavigation.descricao}</td>
-                                                <td>{consulta.idPacienteNavigation.idUsuarioNavigation.nome}</td>
-                                                <td>{consulta.idMedicoNavigation.idUsuarioNavigation.nome}</td>
+                                                {/* <td>{consulta.idPacienteNaviation.nome}</td> */}
+                                                <td>{consulta.idMedico}</td>
                                                 <td>{consulta.descricao}</td>
                                                 <td>{Intl.DateTimeFormat("pt-BR", {
                                                     year: 'numeric', month: 'short', day: 'numeric',
@@ -217,10 +218,7 @@ class consultasAdm extends React.Component {
                                                     <button className='acoes_btn btn' onClick={() => this.cancelarConsulta(consulta)}>Cancelar</button>
                                                     <button className='acoes_btn btn' onClick={() => this.deletarConsulta(consulta)}>Excluir</button>
                                                 </td>
-
                                             </tr>
-
-
                                         )
                                     })
                                 }
@@ -237,7 +235,7 @@ class consultasAdm extends React.Component {
                                 <form onSubmit={this.cadastrarConsulta} >
                                     <div>
 
-                                        <select
+                                        {/* <select
                                             className="input_consulta"
                                             name="idPaciente"
                                             value={this.state.idPaciente}
@@ -253,9 +251,9 @@ class consultasAdm extends React.Component {
                                                     )
                                                 })
                                             }
-                                        </select>
+                                        </select> */}
 
-                                        <select
+                                        {/* <select
                                             className="input_consulta"
                                             name="idMedico"
                                             value={this.state.idMedico}
@@ -271,7 +269,7 @@ class consultasAdm extends React.Component {
                                                     )
                                                 })
                                             }
-                                        </select>
+                                        </select> */}
                                         {/* <select
                                             className="input_consulta"
                                             name="idSituacao"
